@@ -1,6 +1,7 @@
 Flask==3.0.3
 mysql-connector-python==9.0.0
 gunicorn==23.0.0
-pip install uvicorn
 fastapi==0.115.0
 uvicorn==0.30.1
+
+
