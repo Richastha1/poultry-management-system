@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monthly Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f8f9fa;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        label {
+            font-weight: bold;
+        }
+        select, input[type="date"], button {
+            padding: 6px 10px;
+            font-size: 14px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>📊 Monthly Report</h2>
+
+    <form method="POST">
+        <label>Lot No:</label>
+        <select name="lot_no">
+            <option value="">-- Select Lot --</option>
+            {% for lot in lots %}
+                <option value="{{ lot }}" {% if selected_lot == lot %}selected{% endif %}>{{ lot }}</option>
+            {% endfor %}
+        </select>
+
+        <label>From:</label>
+        <input type="date" name="from_date" value="{{ from_date or '' }}">
+        <label>To:</label>
+        <input type="date" name="to_date" value="{{ to_date or '' }}">
+        <button type="submit">Filter</button>
+    </form>
+
+    {% if reports %}
+    <table>
+        <tr>
+            <th>Month</th>
+            <th>Lot No</th>
+            <th>Total Stack Male</th>
+            <th>Total Stack Female</th>
+            <th>Total Feed Male</th>
+            <th>Total Feed Female</th>
+            <th>Total Mortality Male</th>
+            <th>Total Mortality Female</th>
+            <th>Total Cull Male</th>
+            <th>Total Cull Female</th>
+            <th>Total Hatchable</th>
+            <th>Total CR</th>
+            <th>Total RJ</th>
+            <th>Total DB Egg</th>
+            <th>Total Eggs</th>
+        </tr>
+        {% for row in reports %}
+        <tr>
+            <td>{{ row.month }}</td>
+            <td>{{ row.lot_no }}</td>
+            <td>{{ row.total_stack_male }}</td>
+            <td>{{ row.total_stack_female }}</td>
+            <td>{{ row.total_feed_male }}</td>
+            <td>{{ row.total_feed_female }}</td>
+            <td>{{ row.total_mortality_male }}</td>
+            <td>{{ row.total_mortality_female }}</td>
+            <td>{{ row.total_cull_male }}</td>
+            <td>{{ row.total_cull_female }}</td>
+            <td>{{ row.total_hatchable }}</td>
+            <td>{{ row.total_cr }}</td>
+            <td>{{ row.total_rj }}</td>
+            <td>{{ row.total_db_egg }}</td>
+            <td>{{ row.total_eggs }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p><strong>No records found for selected filters.</strong></p>
+    {% endif %}
+
+    <br>
+    <a href="/">⬅ Back to Entry Page</a> | 
+    <a href="/daily_report">📅 Daily Report</a>
+
+</body>
+</html>

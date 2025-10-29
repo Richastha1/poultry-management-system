@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f8f9fa;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        label {
+            font-weight: bold;
+        }
+        select, input[type="date"], button {
+            padding: 6px 10px;
+            font-size: 14px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🐥 Daily Report</h2>
+
+    <form method="POST">
+        <label>Lot No:</label>
+        <select name="lot_no">
+            <option value="">-- Select Lot --</option>
+            {% for lot in lots %}
+                <option value="{{ lot }}" {% if selected_lot == lot %}selected{% endif %}>{{ lot }}</option>
+            {% endfor %}
+        </select>
+
+        <label>From:</label>
+        <input type="date" name="from_date" value="{{ from_date or '' }}">
+        <label>To:</label>
+        <input type="date" name="to_date" value="{{ to_date or '' }}">
+        <button type="submit">Action</button>
+    </form>
+
+    {% if records %}
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Lot No</th>
+            <th>Stack Male</th>
+            <th>Stack Female</th>
+            <th>Feed Male</th>
+            <th>Feed Female</th>
+            <th>Mortality Male</th>
+            <th>Mortality Female</th>
+            <th>Cull Male</th>
+            <th>Cull Female</th>
+            <th>Hatchable</th>
+            <th>CR</th>
+            <th>RJ</th>
+            <th>DB Egg</th>
+            <th>Total Eggs</th>
+            <th>Medicine</th>
+            <th>Vaccine</th>
+            <th>Remarks</th>
+        </tr>
+        {% for row in records %}
+        <tr>
+            <td>{{ row.record_date }}</td>
+            <td>{{ row.lot_no }}</td>
+            <td>{{ row.stack_male }}</td>
+            <td>{{ row.stack_female }}</td>
+            <td>{{ row.feed_male }}</td>
+            <td>{{ row.feed_female }}</td>
+            <td>{{ row.mortality_male }}</td>
+            <td>{{ row.mortality_female }}</td>
+            <td>{{ row.cull_male }}</td>
+            <td>{{ row.cull_female }}</td>
+            <td>{{ row.hatchable }}</td>
+            <td>{{ row.cr }}</td>
+            <td>{{ row.rj }}</td>
+            <td>{{ row.db_egg }}</td>
+            <td>{{ row.total_eggs }}</td>
+            <td>{{ row.medicine }}</td>
+            <td>{{ row.vaccine }}</td>
+            <td>{{ row.remarks }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p><strong>No records found for selected filters.</strong></p>
+    {% endif %}
+
+    <br>
+    <a href="/">⬅ Back to Entry Page</a> | 
+    <a href="/report">📊 Monthly Report</a>
+
+</body>
+</html>

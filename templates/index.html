@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poultry Management - Add Daily Record</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #eef2f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background-color: #ffffff;
+      padding: 30px 50px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 40px;
+    }
+
+    .section {
+      border: 1px solid #ddd;
+      padding: 20px 25px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      background-color: #fafbfc;
+    }
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 20px;
+      color: #4a90e2;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #e1e1e1;
+      padding-bottom: 5px;
+    }
+
+    .form-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      flex: 1;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #4a90e2;
+      outline: none;
+      box-shadow: 0 0 4px rgba(74, 144, 226, 0.3);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #4a90e2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 17px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: #357abd;
+    }
+
+    .links {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .links a {
+      color: #4a90e2;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: 500;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 13px;
+      color: #777;
+    }
+
+    @media (max-width: 700px) {
+      .form-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🐔 Poultry Management - Add Daily Record</h1>
+
+    <form action="/add_record" method="post">
+
+      <!-- General Info Section -->
+      <div class="section">
+        <h2>General Information</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="flock_id">Flock ID:</label>
+            <input type="number" id="flock_id" name="flock_id" required>
+          </div>
+          <div class="form-group">
+            <label for="lot_no">Lot No:</label>
+            <input type="number" id="lot_no" name="lot_no" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="record_date">Date:</label>
+            <input type="date" id="record_date" name="record_date" required>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stock Section -->
+      <div class="section">
+        <h2>Stock Details</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="stack_male">Stack Bird (Male):</label>
+            <input type="number" id="stack_male" name="stack_male" min="0">
+          </div>
+          <div class="form-group">
+            <label for="stack_female">Stack Bird (Female):</label>
+            <input type="number" id="stack_female" name="stack_female" min="0">
+          </div>
+        </div>
+      </div>
+
+      <!-- Feed Section -->
+      <div class="section">
+        <h2>Feed Details</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="Feed_male">Feed (Male) in gm:</label>
+            <input type="number" id="Feed_male" name="Feed_male" min="0">
+          </div>
+          <div class="form-group">
+            <label for="Feed_female">Feed (Female) in gm:</label>
+            <input type="number" id="Feed_female" name="Feed_female" min="0">
+          </div>
+        </div>
+      </div>
+
+      <!-- Mortality Section -->
+      <div class="section">
+        <h2>Mortality & Cull</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="mortality_male">Mortality (Male):</label>
+            <input type="number" id="mortality_male" name="mortality_male" min="0">
+          </div>
+          <div class="form-group">
+            <label for="mortality_female">Mortality (Female):</label>
+            <input type="number" id="mortality_female" name="mortality_female" min="0">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cull_male">Cull (Male):</label>
+            <input type="number" id="cull_male" name="cull_male" min="0">
+          </div>
+          <div class="form-group">
+            <label for="cull_female">Cull (Female):</label>
+            <input type="number" id="cull_female" name="cull_female" min="0">
+          </div>
+        </div>
+      </div>
+
+      <!-- Production Section -->
+      <div class="section">
+        <h2>Production Details</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="Hetchable">Hatchable Eggs:</label>
+            <input type="number" id="Hetchable" name="Hetchable" min="0">
+          </div>
+          <div class="form-group">
+            <label for="CR">Cracked (CR):</label>
+            <input type="number" id="CR" name="CR" min="0">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="RJ">Reject (RJ):</label>
+            <input type="number" id="RJ" name="RJ" min="0">
+          </div>
+          <div class="form-group">
+            <label for="DB">Double Yolk (DB):</label>
+            <input type="number" id="DB" name="DB" min="0">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="total_eggs">Total Eggs:</label>
+            <input type="number" id="total_eggs" name="total_eggs" readonly>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medicine Section -->
+      <div class="section">
+        <h2>Medicine Details</h2>
+        <div class="form-row">
+          <div class="form-group" style="flex: 1;">
+            <label for="medicine">Medicine Used:</label>
+            <input type="text" id="medicine" name="medicine" placeholder="Enter medicine name or description">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group" style="flex: 1;">
+            <label for="medicine">vaccine Used:</label>
+            <input type="text" id="Vaccine" name="vaccine" placeholder="Enter vaccine name or description">
+          </div>
+        </div>
+      </div>
+      <!-- Medicine Section -->
+      <div class="section">
+        <h2>Remarks </h2>
+        <div class="form-row">
+          <div class="form-group" style="flex: 1;">
+            <label for="Remarks">Remarks:</label>
+            <input type="text" id="Remarks" name="Remarks" placeholder="description">
+          </div>
+  
+  
+      </div>
+      <button type="submit">💾 Save Record</button>
+    </form>
+
+    <div class="links">
+      <a href="/report">📊 Monthly Report</a> |
+      <a href="/daily_report">📅 Daily Report</a>
+    </div>
+
+    <div class="footer">
+      &copy; 2025 Poultry Management System
+    </div>
+  </div>
+
+  <script>
+    // Function to update total eggs
+    function updateTotal() {
+      const hetchable = parseInt(document.getElementById('Hetchable').value) || 0;
+      const cr = parseInt(document.getElementById('CR').value) || 0;
+      const rj = parseInt(document.getElementById('RJ').value) || 0;
+      const db = parseInt(document.getElementById('DB').value) || 0;
+
+      const total = hetchable + cr + rj + db;
+      document.getElementById('total_eggs').value = total;
+    }
+
+    // Add listeners for live update
+    document.getElementById('Hetchable').addEventListener('input', updateTotal);
+    document.getElementById('CR').addEventListener('input', updateTotal);
+    document.getElementById('RJ').addEventListener('input', updateTotal);
+    document.getElementById('DB').addEventListener('input', updateTotal);
+  </script>
+</body>
+</html>
